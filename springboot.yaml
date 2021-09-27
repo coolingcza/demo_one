@@ -1,0 +1,16 @@
+- name: update web servers
+  hosts: localhost
+  tasks:
+  - name: replace default port value with 8081
+    shell: sed -i 's/8080/8081/g' pom.xml
+    args:
+      chdir: ${WORKSPACE}
+  - name: build and deploy maven spring boot app
+    shell: mvn clean tomcat7:redeploy
+    args:
+      chdir: ${WORKSPACE}
+  - name: restart service apache tomcat9 (in all cases)
+    service:
+      name: tomcat9
+      state: restarted
+    become: true
