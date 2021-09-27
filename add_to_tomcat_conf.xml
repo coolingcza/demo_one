@@ -1,0 +1,3 @@
+<!-- add these lines to the bottom of tomcat conf file -->
+    <role rolename="manager"/>
+</tomcat>
